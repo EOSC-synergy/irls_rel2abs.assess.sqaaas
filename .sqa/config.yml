@@ -1,0 +1,46 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/stevenjgibbons/irls_rel2abs:
+      branch: main
+      repo: https://github.com/stevenjgibbons/irls_rel2abs
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/stevenjgibbons/irls_rel2abs git:
+        commands:
+        - /usr/bin/env sh .sqa/script.ready-russet-cichlid.sh
+        container: qc.acc_cheeky-cardinal-ragdoll
+  QC.Doc:
+    repos:
+      github.com/stevenjgibbons/irls_rel2abs find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.freaky-fuchsia-kudu.sh
+        container: qc.doc_flaky-rust-tiger
+      github.com/stevenjgibbons/irls_rel2abs git:
+        commands:
+        - /usr/bin/env sh .sqa/script.crabby-chocolate-penguin.sh
+        container: qc.doc_hilly-white-lion
+      github.com/stevenjgibbons/irls_rel2abs markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.queasy-aquamarine-forest.sh
+        container: qc.doc_blurry-denim-weasel
+  QC.Lic:
+    repos:
+      github.com/stevenjgibbons/irls_rel2abs licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.foggy-copper-dane.sh
+        container: qc.lic_ready-lime-angelfish
+  QC.Ver:
+    repos:
+      github.com/stevenjgibbons/irls_rel2abs get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.lanky-denim-javanese.sh
+        container: qc.ver_squeaky-seashell-barracuda
+timeout: 5400
